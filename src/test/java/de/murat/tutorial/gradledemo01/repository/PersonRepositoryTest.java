@@ -15,9 +15,6 @@ import static org.junit.Assert.*;
 public class PersonRepositoryTest {
 
     @Autowired
-    private TestEntityManager em;
-
-    @Autowired
     private PersonRepository personRepository;
 
 
@@ -27,7 +24,6 @@ public class PersonRepositoryTest {
         Person murat = new Person("Murat", "Yildiz");
         assertNull(murat.getId());
 
-
         // when
         Person muratFromDb = personRepository.save(murat);
         assertNotNull(muratFromDb.getId());
@@ -35,7 +31,6 @@ public class PersonRepositoryTest {
         // then
         assertEquals(murat.getId(), muratFromDb.getId());
         assertEquals(murat.getFirstName(), muratFromDb.getFirstName());
-
     }
 
 }
