@@ -1,14 +1,15 @@
 package de.murat.tutorial.gradledemo01.service;
 
+import de.murat.tutorial.gradledemo01.category.UnitTest;
 import de.murat.tutorial.gradledemo01.model.Person;
 import de.murat.tutorial.gradledemo01.repository.PersonRepository;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.times;
 
 
 @RunWith(SpringRunner.class)
+@Category(UnitTest.class)
 public class PersonServiceImplTest {
 
     @TestConfiguration

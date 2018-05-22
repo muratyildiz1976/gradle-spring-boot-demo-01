@@ -4,9 +4,11 @@ buildscript {
     }
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:1.2.0")
     }
 }
 
@@ -14,15 +16,19 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.unbroken-dome.test-sets'
 
 group = 'de.murat.tutorial'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 10
 
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
 repositories {
     mavenCentral()
 }
-
 
 dependencies {
     compile("javax.xml.bind:jaxb-api:2.3.0")
@@ -37,3 +43,28 @@ dependencies {
     runtime("com.h2database:h2:1.4.197")
 
 }
+
+task testUnit(type: Test) {
+    useJUnit {
+        includeCategories 'de.murat.tutorial.gradledemo01.category.UnitTest'
+        excludeCategories 'de.murat.tutorial.gradledemo01.category.IntegrationTest'
+    }
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+
+
+task testIntegration(type: Test) {
+    useJUnit {
+        includeCategories 'de.murat.tutorial.gradledemo01.category.IntegrationTest'
+        excludeCategories 'de.murat.tutorial.gradledemo01.category.UnitTest'
+    }
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+
+

@@ -3,9 +3,11 @@ package de.murat.tutorial.gradledemo01.controller;
 
 import de.murat.tutorial.gradledemo01.GradleDemo01Application;
 
+import de.murat.tutorial.gradledemo01.category.IntegrationTest;
 import de.murat.tutorial.gradledemo01.repository.PersonRepository;
 import de.murat.tutorial.gradledemo01.service.PersonServiceImpl;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:createPersonTable.sql"),
         @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:populatePersonTable.sql"),
         @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:dropPersonTable.sql")})
+@Category(IntegrationTest.class)
 public class PersonControllerTest {
 
     @TestConfiguration
